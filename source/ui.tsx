@@ -7,7 +7,7 @@ import Finish from './finish';
 
 interface PropTypes {
   command?: string;
-  options?: string;
+  options?: string[];
   help: string
 }
 
@@ -17,8 +17,8 @@ export default function App({command, options, help}: PropTypes): JSX.Element {
     }
 
     const component = {
-        start: <Start branchName={options} />,
-        commit: <Commit message={options}/>,
+        start: <Start branchName={options ? options[0] : undefined}/>,
+        commit: <Commit message={options ? options.join(' ') : undefined}/>,
         finish: <Finish/>,
     }[command];
 
