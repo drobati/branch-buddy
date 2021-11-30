@@ -14,8 +14,6 @@ export default function Start({branchName}: Props) {
     const commands = [
         ['git', ['checkout', '-b', branchName]],
         ['git', ['push', '-u', 'origin', branchName]],
-        ['gh', ['pr', 'create', '-b', branchName, '-f']],
-        ['gh', ['pr', 'view', '-w']]
     ];
 
     for (const [command, args] of commands) {

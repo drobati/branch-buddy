@@ -11,7 +11,7 @@ test('greet unknown user', t => {
 });
 
 test('greet user with a name', t => {
-	const {lastFrame} = render(<App command="start" options="branchName" help="fake-help"/>);
+	const {lastFrame} = render(<App command="start" options={["branchName"]} help="fake-help"/>);
 
 	t.is(lastFrame(), chalk`Created Branch and PR.`);
 });
