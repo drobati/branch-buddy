@@ -5,13 +5,13 @@ import {render} from 'ink-testing-library';
 import App from './ui';
 
 test('greet unknown user', t => {
-	const {lastFrame} = render(<App/>);
+	const {lastFrame} = render(<App command="start"/>);
 
 	t.is(lastFrame(), chalk`Hello, {green Stranger}`);
 });
 
 test('greet user with a name', t => {
-	const {lastFrame} = render(<App name="Jane"/>);
+	const {lastFrame} = render(<App command="start" options="branchName"/>);
 
-	t.is(lastFrame(), chalk`Hello, {green Jane}`);
+	t.is(lastFrame(), chalk`Created Branch and PR.`);
 });

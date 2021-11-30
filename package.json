@@ -1,6 +1,6 @@
 {
 	"name": "@drobati/branch-buddy",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"license": "MIT",
 	"bin": {
 	  "branch-buddy": "dist/cli.js"
