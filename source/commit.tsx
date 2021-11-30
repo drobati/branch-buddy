@@ -20,7 +20,6 @@ export default function Commit({message}: Props) {
 
     for (const [command, args, failSilently] of commands) {
         const { stderr, status } = spawnSync(command as string, args as string[])
-        // consider using bunyan.debug with a flag from cli for level?
         if (status !== 0 && !failSilently) {
             return <Text>{stderr.toString()}</Text>;
         }
