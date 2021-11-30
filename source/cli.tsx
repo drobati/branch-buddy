@@ -26,6 +26,6 @@ const cli = meow(`
 		$ branch-buddy finish
 		Set PR to merge.
 `);
-const props = {command: cli.input[0], options: cli.input[1]}
+const props = {command: cli.input[0], options: cli.input[1], help: cli.help}
 render(<App {...props} />);
 

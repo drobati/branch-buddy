@@ -1,41 +1,31 @@
-import React, {useEffect, useState} from "react";
-import { spawn } from 'child_process';
+import React from "react";
 import {Text} from "ink";
+import {spawnSync} from 'child_process';
 
 interface Props {
     branchName?: string;
 }
 
-export default function Start({ branchName }: Props) {
+export default function Start({branchName}: Props) {
     if (!branchName) {
         return <Text>No branch name provided.</Text>;
     }
-    const [ error, setError ] = useState('');
 
-    useEffect(() => {
-        const checkout = spawn('git', ['checkout', '-b', branchName]);
-        checkout.stderr.on('data', (data) => {
-            setError(data.toString());
-        });
-        const push = spawn('git', ['push', '-u', 'origin', branchName]);
-        push.stderr.on('data', (data) => {
-            setError(data.toString());
-        });
-        const pullRequest = spawn('gh', ['pr', 'create', '-b', branchName, '-f']);
-        pullRequest.stderr.on('data', (data) => {
-            setError(data.toString());
-        });
-        const open = spawn('gh', ['pr', 'view', '-w'])
-        open.stderr.on('data', (data) => {
-            setError(data.toString());
-        });
-    }, [error])
+    const commands = [
+        ['git', ['checkout', '-b', branchName]],
+        ['git', ['push', '-u', 'origin', branchName]],
+        ['gh', ['pr', 'create', '-b', branchName, '-f']],
+        ['gh', ['pr', 'view', '-w']]
+    ];
 
-    if (error) {
-        return <Text>{error}</Text>;
+    for (const [command, args] of commands) {
+        const { stderr, status } = spawnSync(command as string, args as string[])
+        // consider using bunyan.debug with a flag from cli for level?
+        // console.log({stderr: stderr.toString(), stdout: stdout.toString(), status});
+        if (status !== 0) {
+            return <Text>{stderr.toString()}</Text>;
+        }
     }
 
-    return (
-        <Text>Created Branch and PR.</Text>
-    );
+    return (<Text>Created Branch and PR.</Text>);
 }

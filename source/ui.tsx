@@ -8,11 +8,12 @@ import Finish from './finish';
 interface PropTypes {
   command?: string;
   options?: string;
+  help: string
 }
 
-export default function App({command, options}: PropTypes): JSX.Element {
-    if (!command) {
-        return <Text>No command provided.</Text>
+export default function App({command, options, help}: PropTypes): JSX.Element {
+    if (!command || !['start', 'commit', 'finish'].includes(command)) {
+        return <Text>{help}</Text>;
     }
 
     const component = {
