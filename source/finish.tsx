@@ -5,12 +5,11 @@ import {spawnSync} from 'child_process';
 export default function Finish() {
     const commands = [
         ['gh', ['pr', 'merge', '--auto', '-d', '-m']],
+        ['git', ['pull']]
     ];
 
     for (const [command, args] of commands) {
-        const { stderr, stdout, status } = spawnSync(command as string, args as string[])
-        // consider using bunyan.debug with a flag from cli for level?
-        console.log({stderr: stderr.toString(), stdout: stdout.toString(), status});
+        const { stderr, status } = spawnSync(command as string, args as string[])
         if (status !== 0) {
             return <Text>{stderr.toString()}</Text>;
         }
