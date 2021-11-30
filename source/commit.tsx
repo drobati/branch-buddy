@@ -12,7 +12,7 @@ export default function Commit({message}: Props) {
     }
 
     const commands = [
-        ['git', ['commit', '-a', '-m', `"${message}"`]],
+        ['git', ['commit', '-a', '-m', message]],
         ['git', ['push']],
         ['gh', ['pr', 'create', '-f']],
         ['gh', ['pr', 'view', '-w']]
