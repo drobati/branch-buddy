@@ -4,7 +4,7 @@ import {spawnSync} from 'child_process';
 
 export default function Finish() {
     const commands = [
-        ['gh', ['merge', '--auto', '-d', '-m']],
+        ['gh', ['pr', 'merge', '--auto', '-d', '-m']],
     ];
 
     for (const [command, args] of commands) {
