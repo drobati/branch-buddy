@@ -1,9 +1,9 @@
 {
 	"name": "@drobati/branch-buddy",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"license": "MIT",
 	"bin": {
-	  "branch-buddy": "dist/cli.js"
+		"branch-buddy": "dist/cli.js"
 	},
 	"engines": {
 		"node": ">=10"
@@ -41,6 +41,7 @@
 	"devDependencies": {
 		"@ava/typescript": "^3.0.1",
 		"@sindresorhus/tsconfig": "^2.0.0",
+		"@types/bl": "^5.0.2",
 		"@types/react": "^17.0.37",
 		"ava": "^3.15.0",
 		"chalk": "^4.1.2",
@@ -48,6 +49,7 @@
 		"eslint-plugin-react": "^7.27.1",
 		"eslint-plugin-react-hooks": "^4.3.0",
 		"ink-testing-library": "^2.1.0",
+		"ts-node": "^10.4.0",
 		"typescript": "^4.5.2",
 		"xo": "^0.39.1"
 	},
@@ -55,7 +57,7 @@
 		"type": "git",
 		"url": "git+https://github.com/drobati/branch-buddy.git"
 	},
-    "author": "Derek Robati",
+	"author": "Derek Robati",
 	"bugs": {
 		"url": "https://github.com/drobati/branch-buddy/issues"
 	},

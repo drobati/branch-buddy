@@ -2,10 +2,11 @@
 
 ## Install
 
-```bash
-$ npm install --global branch-buddy
-```
+Has a dependency on git and gh.
 
+```bash
+$ npm install --global @drobati/branch-buddy
+```
 
 ## CLI
 
@@ -13,12 +14,27 @@ $ npm install --global branch-buddy
 $ branch-buddy --help
 
   Usage
-    $ branch-buddy
+    $ branch-buddy start <featureName>
+    $ branch-buddy commit <message>
+    $ branch-buddy finish
 
-  Options
-    --name  Your name
+  Args
+    subcommand
+    options
 
   Examples
-    $ branch-buddy --name=Jane
-    Hello, Jane
+    $ branch-buddy start <featureName>
+    Created Branch and PR.
+    https://link_to_your_pr
+    
+    $ branch-buddy commit <message>
+    Committed all tracked files and pushed to PR.
+    https://link_to_your_pr
+    
+    $ branch-buddy finish
+    Merged PR and deleted branch.
+    
+    $ alias bs='branch-buddy start'
+    $ alias bc='branch-buddy commit'
+    $ alias bf='branch-buddy finish'
 ```
