@@ -14,15 +14,14 @@ export default function Commit({message}: Props) {
     const commands = [
         ['git', ['commit', '-a', '-m', message]],
         ['git', ['push']],
-        ['gh', ['pr', 'create', '-f']],
+        ['gh', ['pr', 'create', '-f'], true],
         ['gh', ['pr', 'view', '-w']]
     ];
 
-    for (const [command, args] of commands) {
-        const { stderr, stdout, status } = spawnSync(command as string, args as string[])
+    for (const [command, args, failSilently] of commands) {
+        const { stderr, status } = spawnSync(command as string, args as string[])
         // consider using bunyan.debug with a flag from cli for level?
-        console.log({stderr: stderr.toString(), stdout: stdout.toString(), status});
-        if (status !== 0) {
+        if (status !== 0 && !failSilently) {
             return <Text>{stderr.toString()}</Text>;
         }
     }
