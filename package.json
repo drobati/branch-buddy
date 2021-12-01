@@ -18,13 +18,12 @@
     "dist/cli.js"
   ],
   "dependencies": {
-    "@types/jest": "^27.0.3",
     "ink": "^3.2.0",
     "meow": "^9.0.0",
     "react": "^17.0.2"
   },
   "devDependencies": {
-    "@sindresorhus/tsconfig": "^2.0.0",
+    "@types/jest": "^27.0.3",
     "@types/react": "^17.0.37",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
@@ -41,6 +40,7 @@
     "ink-testing-library": "^2.1.0",
     "jest": "^27.4.2",
     "prettier": "^2.5.0",
+    "ts-jest": "^27.0.7",
     "typescript": "^4.5.2"
   },
   "repository": {
