@@ -51,5 +51,11 @@
   "bugs": {
     "url": "https://github.com/drobati/branch-buddy/issues"
   },
-  "homepage": "https://github.com/drobati/branch-buddy#readme"
+  "homepage": "https://github.com/drobati/branch-buddy#readme",
+  "main": "dist/cli.js",
+  "keywords": [
+    "cli",
+    "git"
+  ],
+  "types": "./dist/cli.d.ts"
 }
