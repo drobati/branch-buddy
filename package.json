@@ -1,6 +1,6 @@
 {
   "name": "@drobati/branch-buddy",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "bin": {
     "branch-buddy": "dist/cli.js"
@@ -15,7 +15,7 @@
     "test": "jest"
   },
   "files": [
-    "dist/cli.js"
+    "dist/**/*"
   ],
   "dependencies": {
     "ink": "^3.2.0",
