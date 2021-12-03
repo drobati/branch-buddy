@@ -27,6 +27,5 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
-    'import/extensions': [1, 'never'],
   },
 };
