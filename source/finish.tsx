@@ -1,17 +1,19 @@
 import React from 'react';
 import { Text } from 'ink';
 import { spawnSync } from 'child_process';
+import createCommands from './util';
 
 function Finish() {
-  const commands = [
-    ['gh', ['pr', 'merge', '--auto', '-d', '-m']],
-    ['git', ['pull']],
-  ];
+  const commands = createCommands([
+    { value: 'gh pr ready', failSilently: true },
+    { value: 'gh pr merge --auto -d -m' },
+    { value: 'git pull' },
+  ]);
 
   for (let i = 0; i < commands.length; i += 1) {
-    const [command, args] = commands[i];
-    const { stderr, status } = spawnSync(command as string, args as string[]);
-    if (status !== 0) {
+    const { command, args, failSilently } = commands[i];
+    const { stderr, status } = spawnSync(command, args);
+    if (status !== 0 && !failSilently) {
       return <Text>{stderr.toString()}</Text>;
     }
   }
