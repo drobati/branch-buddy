@@ -18,9 +18,9 @@ function Start({ branchName }: Props) {
   ]);
 
   for (let i = 0; i < commands.length; i += 1) {
-    const { command, args } = commands[i];
+    const { command, args, failSilently } = commands[i];
     const { stderr, status } = spawnSync(command, args);
-    if (status !== 0) {
+    if (status !== 0 && !failSilently) {
       return <Text>{stderr.toString()}</Text>;
     }
   }

@@ -21,7 +21,6 @@ function Commit({ message }: Props) {
 
   for (let i = 0; i < commands.length; i += 1) {
     const { command, args, failSilently } = commands[i];
-    console.log(command, args, failSilently);
     const { stderr, status } = spawnSync(command, args);
     if (status !== 0 && !failSilently) {
       return <Text>{stderr.toString()}</Text>;
