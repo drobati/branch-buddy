@@ -5,6 +5,8 @@
     "jsx": "react",
     "outDir": "dist",
     "esModuleInterop": true,
+    "inlineSources": true,
+    "sourceMap": true
   },
   "include": ["source"]
 }

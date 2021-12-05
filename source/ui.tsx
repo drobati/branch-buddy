@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'ink';
+import { Box, Text } from 'ink';
 
 import Start from './start';
 import Commit from './commit';
@@ -22,7 +22,7 @@ function App({ command, options, help }: PropTypes): JSX.Element {
     finish: <Finish />,
   }[command];
 
-  return <Text>{component}</Text>;
+  return <Box>{component}</Box>;
 }
 
 App.defaultProps = {
