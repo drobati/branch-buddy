@@ -1,6 +1,6 @@
 import { render } from 'ink-testing-library';
 import * as React from 'react';
-import App from './ui';
+import App from './App';
 
 describe('CLI', () => {
   const help = 'Usage: cli [options]';

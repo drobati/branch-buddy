@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'ink';
 import { spawnSync } from 'child_process';
-import createCommands from './util';
+import createCommands from '../libs/util';
 
 function Finish() {
   const commands = createCommands([
