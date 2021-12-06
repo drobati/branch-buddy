@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { Box, Text } from 'ink';
 
-import Start from './start';
-import Commit from './commit';
-import Finish from './finish';
+import Start from './commands/Start';
+import Commit from './commands/Commit';
+import Finish from './commands/Finish';
 
 interface PropTypes {
   command?: string;

@@ -1,8 +1,9 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { Text } from 'ink';
 import { spawnSync } from 'child_process';
-import createCommands from './util';
-import UntrackedFiles from './components/UntrackedFiles';
+import createCommands from '../libs/util';
+import UntrackedFiles from '../components/UntrackedFiles';
+import FinishStep from '../components/FinishStep';
 
 interface Props {
   message?: string;
@@ -10,15 +11,14 @@ interface Props {
 
 function Commit({ message }: Props) {
   const [step, setStep] = useState(0);
-  useLayoutEffect(() => () => setStep(step + 1));
+  const next = () => setStep(step + 1);
 
   const commands = createCommands([
     { value: `git ls-files --exclude-standard --others` },
-    { value: 'echo "test"' },
-    // { value: `git commit -a -m %`, replace: [message] },
-    // { value: 'git push' },
-    // { value: 'gh pr create -f -d', failSilently: true },
-    // { value: 'gh pr view -w' },
+    { value: `git commit -a -m %`, replace: [message] },
+    { value: 'git push' },
+    { value: 'gh pr create -f -d', failSilently: true },
+    { value: 'gh pr view -w' },
   ]);
 
   if (!message) {
@@ -37,14 +37,15 @@ function Commit({ message }: Props) {
     const files = stdout.toString();
     if (files.length > 0) {
       const filesArray = files.split('\n').slice(0, -1);
-      return <UntrackedFiles files={filesArray} />;
+      return <UntrackedFiles files={filesArray} next={next} />;
     }
   }
 
-  if (step === commands.length - 1) {
-    return <Text>Committed all tracked files and pushed to PR.</Text>;
+  if (step > 0 && step < commands.length - 1) {
+    return <FinishStep step={step} next={next} />;
   }
-  return <Text>Still processing commands...</Text>;
+
+  return <Text>Committed all tracked files and pushed to PR.</Text>;
 }
 
 Commit.defaultProps = {

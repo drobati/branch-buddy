@@ -1,34 +1,41 @@
-import React, { useState } from 'react';
-import { Text } from 'ink';
+import React from 'react';
+import { useApp } from 'ink';
 import { spawnSync } from 'child_process';
 import MultiSelect from './MultiSelect';
+import ConfirmInput from './ConfirmInput';
 
 interface UntrackedFilesProps {
   files: string[];
+  next: () => void;
 }
 
-function UntrackedFiles({ files }: UntrackedFilesProps) {
-  const [untrackedFiles, setUntrackedFiles] = useState([]);
-
-  if (untrackedFiles.length === 0) {
-    if (files.length > 5) {
-      // TODO: Prompt to continue
-      return <Text>There are lots of untracked files. Continue?</Text>;
-    }
-    if (files.length > 0) {
-      const items = files.map((file) => ({ label: file, value: file }));
-      return <MultiSelect label="Select which files to track:" items={items} onSubmit={setUntrackedFiles} />;
-    }
-  } else {
-    // Track the untracked files using spawnSync.
-    for (let i = 0; i < untrackedFiles.length; i += 1) {
-      const file = untrackedFiles[i].value;
-      const { stderr, status } = spawnSync('git', ['add', file]);
-      if (status !== 0) {
-        return <Text>Error tracking file: {stderr.toString()}</Text>;
+function UntrackedFiles({ files, next }: UntrackedFilesProps) {
+  if (files.length > 5) {
+    const label = 'There are lots of untracked files. Continue? (Y/n)';
+    const { exit } = useApp();
+    const onSubmit = (value: boolean) => {
+      if (value === true) {
+        next();
+      } else {
+        exit();
       }
-    }
-    return <Text>Added tracked files.</Text>;
+    };
+    return <ConfirmInput label={label} onSubmit={onSubmit} />;
+  }
+  if (files.length > 0) {
+    const items = files.map((file) => ({ label: file, value: file }));
+    const onSubmit = (untrackedFiles) => {
+      if (untrackedFiles.length === 0) {
+        next();
+      } else {
+        const { stderr, status } = spawnSync('git', ['add', untrackedFiles.map((f) => f.value).join(' ')]);
+        if (status !== 0) {
+          throw new Error(`Error tracking files: ${stderr.toString()}`);
+        }
+        next();
+      }
+    };
+    return <MultiSelect label="Select which files to track:" items={items} onSubmit={onSubmit} />;
   }
 }
 

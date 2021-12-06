@@ -1,5 +1,5 @@
-import { Box, Text } from 'ink';
 import React from 'react';
+import { Box, Text } from 'ink';
 import InkMultiSelect, { ListedItem } from 'ink-multi-select';
 
 interface Props {
