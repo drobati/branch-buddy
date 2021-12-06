@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
-import { Box, Text } from 'ink';
-import InkConfirmInput from 'ink-confirm-input';
+import React from 'react';
+import { Box, Text, useInput } from 'ink';
 
 interface Props {
   label: string;
-  onSubmit: (value: boolean) => void;
+  onSubmit: (input: string, key?: object) => void;
 }
 
 function ConfirmInput({ label, onSubmit }: Props) {
-  const [value, setValue] = useState('');
+  useInput(onSubmit);
   return (
     <Box flexDirection="column">
       <Text>{label}</Text>
-      <InkConfirmInput isChecked value={value} onChange={setValue} onSubmit={onSubmit} />
     </Box>
   );
 }

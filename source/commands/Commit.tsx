@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Text } from 'ink';
 import { spawnSync } from 'child_process';
 import createCommands from '../libs/util';
@@ -27,7 +27,6 @@ function Commit({ message }: Props) {
 
   const { command, args, failSilently } = commands[step];
   const { stdout, stderr, status } = spawnSync(command, args);
-  console.log({ stdout: stdout.toString(), stderr: stderr.toString(), status, step });
 
   if (status !== 0 && !failSilently) {
     return <Text>{stderr.toString()}</Text>;

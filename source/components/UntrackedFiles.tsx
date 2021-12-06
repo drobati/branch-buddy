@@ -13,8 +13,8 @@ function UntrackedFiles({ files, next }: UntrackedFilesProps) {
   if (files.length > 5) {
     const label = 'There are lots of untracked files. Continue? (Y/n)';
     const { exit } = useApp();
-    const onSubmit = (value: boolean) => {
-      if (value === true) {
+    const onSubmit = (input: string) => {
+      if (input === 'y' || input === 'Y') {
         next();
       } else {
         exit();
