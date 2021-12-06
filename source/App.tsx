@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React from 'react';
 import { Box, Text } from 'ink';
 
 import Start from './commands/Start';
